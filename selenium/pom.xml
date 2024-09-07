@@ -58,9 +58,42 @@
     <version>2.16.1</version>
 </dependency>
 
+    <!-- https://mvnrepository.com/artifact/ru.sbtqa.tag.pagefactory/page-factory-core -->
+<dependency>
+    <groupId>ru.sbtqa.tag.pagefactory</groupId>
+    <artifactId>page-factory-core</artifactId>
+    <version>21.0.1</version>
+</dependency>
+
+  <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
+<dependency>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <version>3.5.0</version>
     
-    
-    
-    
+</dependency>
+
   </dependencies>
+  
+  
+  <build>
+        <plugins>
+            <!-- Maven Surefire Plugin Configuration -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+    			<artifactId>maven-surefire-plugin</artifactId>
+    			<version>3.5.0</version>
+                <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>/selenium/testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+  
+
+    
+    
+
 </project>

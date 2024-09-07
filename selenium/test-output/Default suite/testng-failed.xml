@@ -3,15 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="rohit.selenium.Test1">
+      <class name="rohit.selenium.InternetHerokuAppTests">
         <methods>
-          <include name="testMethod1"/>
-          <include name="oneTimeEndTest"/>
-          <include name="oneTimeSetUp"/>
-          <include name="endTest"/>
+          <include name="tearDown"/>
+          <include name="ABTesting"/>
           <include name="setUp"/>
         </methods>
-      </class> <!-- rohit.selenium.Test1 -->
+      </class> <!-- rohit.selenium.InternetHerokuAppTests -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
