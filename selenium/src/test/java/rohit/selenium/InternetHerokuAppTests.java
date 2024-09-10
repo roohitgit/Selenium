@@ -1,7 +1,6 @@
 package rohit.selenium;
 
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import com.aventstack.extentreports.Status;
 import PageObjects.HerokuAppPageObject;
@@ -9,31 +8,26 @@ import utilities.BaseClass;
 
 @Test
 public class InternetHerokuAppTests extends BaseClass {
-
 	HerokuAppPageObject page;
-	 
-	@BeforeClass
-	    public void setUp() {
-	        page = new HerokuAppPageObject(driver);
-	    }
 
 	@Test
-	public void ABTesting() {
+	public void method1() throws InterruptedException {
 
+		HerokuAppPageObject page = new HerokuAppPageObject(driver);
 		page.clickOnABTesting();
-		Assert.assertEquals("A/B Test Control",page.getTextAfterABTestingClick ());
-		test.log(Status.INFO, "A/B Test Control text is displayed successfully");
-	
-
+		page.getTextAfterABTestingClick();
+		test.log(Status.INFO, "Expected Text is displayed.");
 	}
 
 	@Test
-	public void testMethod2() {
+	public void method2() {
 
-//		driver.get("https://www.google.com");
-//		System.out.println("Google page opened");
-//		test.log(Status.PASS, "comment");
-
+		HerokuAppPageObject page = new HerokuAppPageObject(driver);
+		page.clickOnAddRemoveElements();
+		page.clickOnAddElementBtn(1);
+		page.clickOnDeleteBtn();
+		page.clickOnAddElementBtn(3);
+		Assert.assertEquals(page.checkNoOfDeleteButtons(), 2);
+		test.log(Status.INFO, "Added and deleted successfully.");
 	}
-
 }

@@ -8,9 +8,7 @@
     <classes>
       <class name="rohit.selenium.InternetHerokuAppTests">
         <methods>
-          <include name="tearDown"/>
-          <include name="ABTesting"/>
-          <include name="setUp"/>
+          <include name="method2"/>
         </methods>
       </class> <!-- rohit.selenium.InternetHerokuAppTests -->
     </classes>
