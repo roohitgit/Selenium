@@ -1,6 +1,8 @@
 package PageObjects;
 
 import java.time.Duration;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -35,6 +37,19 @@ public class HerokuAppPageObject {
 	@FindBy(css = ".added-manually")
 	private WebElement deleteBtn;
 
+	@FindBy(xpath = "//*[text()='Basic Auth']")
+	private WebElement basicAuth;
+	
+	@FindBy(css = "a[href='/broken_images']")
+	private WebElement brokenImages;
+	
+	@FindBy(xpath = "//a[normalize-space()='Checkboxes']")
+	private WebElement checkBoxes;
+	
+	
+	
+	
+	
 	public void clickOnABTesting() {
 		abTesting.click();
 	}
@@ -72,5 +87,27 @@ public class HerokuAppPageObject {
 		return ele.findElements(By.tagName("button")).size();
 
 	}
+	
+	public void clickOnBasicAuth()
+	{
+		basicAuth.click();
+	}
+	
+	public void clickOnBrokenImages()
+	{
+		brokenImages.click();
+	}
+	
+	public void clickOnCheckBoxes()
+	{
+		checkBoxes.click();
+	}
+	
+	public List<WebElement> checkCheckBoxes()
+	{
+		return driver.findElements((By.xpath("//input[@type='checkbox']")));
+		
+	}
+	
 
 }
