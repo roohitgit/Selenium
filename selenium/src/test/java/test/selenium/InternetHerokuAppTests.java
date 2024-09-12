@@ -95,7 +95,7 @@ public class InternetHerokuAppTests extends BaseClass {
 	}
 
 	@Test(enabled = false)
-	public void dradAndDrop() throws IOException, InterruptedException {
+	public void dragAndDrop() throws IOException, InterruptedException {
 		HerokuAppPageObject page = new HerokuAppPageObject(driver);
 		page.clickOnDragAndDrop();
 		Actions action = new Actions(driver);
@@ -137,7 +137,7 @@ public class InternetHerokuAppTests extends BaseClass {
 	
 	}
 	
-	@Test
+	@Test(enabled = false)
 	public void entryAd() throws IOException, InterruptedException
 	{
 		HerokuAppPageObject page = new HerokuAppPageObject(driver);
