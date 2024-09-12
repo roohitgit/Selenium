@@ -46,6 +46,46 @@ public class HerokuAppPageObject {
 	@FindBy(xpath = "//a[normalize-space()='Checkboxes']")
 	private WebElement checkBoxes;
 	
+	@FindBy(css = "a[href='/drag_and_drop']")
+	private WebElement dragAndDrop;
+	
+	@FindBy(xpath = "//header[normalize-space()='A']")
+	public WebElement source;
+	
+	@FindBy(xpath = "//header[normalize-space()='B']")
+	public WebElement target;
+	
+	@FindBy(xpath = "//a[normalize-space()='Dropdown']")
+	public WebElement dropDown;
+	
+	@FindBy(id = "dropdown")
+	public WebElement dropDownList;
+	
+	@FindBy(css = "a[href='/entry_ad']")
+	public WebElement entryAd;
+	
+	@FindBy(css = "#restart-ad")
+	public WebElement restartAd;
+	
+	@FindBy(xpath = "//p[normalize-space()='Close']")
+	public WebElement entryAdModalClose;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -106,8 +146,36 @@ public class HerokuAppPageObject {
 	public List<WebElement> checkCheckBoxes()
 	{
 		return driver.findElements((By.xpath("//input[@type='checkbox']")));
-		
 	}
 	
+	public void clickOnDragAndDrop()
+	{
+		dragAndDrop.click();
+	}
+	
+	public void clickOnDropDown()
+	{
+		dropDown.click();
+	}
+	
+	public void clickOnDropDownList()
+	{
+		dropDownList.click();
+	}
+	
+	public void clickOnEntryAd()
+	{
+		entryAd.click();
+	}
+	
+	public void clickOnRestartEntryAd()
+	{
+		restartAd.click();
+	}
+	
+	public void clickOnCloseEntryModalWindow()
+	{
+		entryAdModalClose.click();
+	}
 
 }
