@@ -99,12 +99,12 @@ public class InternetHerokuAppTests extends BaseClass {
 		HerokuAppPageObject page = new HerokuAppPageObject(driver);
 		page.clickOnDragAndDrop();
 		Actions action = new Actions(driver);
-		
+
 		test.log(Status.INFO, "Before drag and drop",
 				MediaEntityBuilder.createScreenCaptureFromPath(captureScreenShot(driver)).build());
-		
+
 		action.dragAndDrop(page.source, page.target).build().perform();
-		
+
 		test.log(Status.INFO, "After drag and drop",
 				MediaEntityBuilder.createScreenCaptureFromPath(captureScreenShot(driver)).build());
 
@@ -112,13 +112,13 @@ public class InternetHerokuAppTests extends BaseClass {
 
 	@Test(enabled = false)
 	public void dropDown() throws IOException, InterruptedException {
-		
+
 		HerokuAppPageObject page = new HerokuAppPageObject(driver);
 		page.clickOnDropDown();
 		Select dropDown = new Select(page.dropDownList);
 
 		WebElement firstElement = dropDown.getFirstSelectedOption();
-		System.out.println("first selected option - "+firstElement);
+		System.out.println("first selected option - " + firstElement);
 		test.log(Status.INFO, "Before select by visible text",
 				MediaEntityBuilder.createScreenCaptureFromPath(captureScreenShot(driver)).build());
 
@@ -134,19 +134,64 @@ public class InternetHerokuAppTests extends BaseClass {
 		dropDown.selectByValue("1");
 		test.log(Status.INFO, "After select by value",
 				MediaEntityBuilder.createScreenCaptureFromPath(captureScreenShot(driver)).build());
-	
+
 	}
-	
+
 	@Test(enabled = false)
 	public void entryAd() throws IOException, InterruptedException
+
 	{
 		HerokuAppPageObject page = new HerokuAppPageObject(driver);
 		page.clickOnEntryAd();
-		Thread.sleep(5000);
-		test.log(Status.INFO, "Before modal close",MediaEntityBuilder.createScreenCaptureFromPath(captureScreenShot(driver)).build());
+		test.log(Status.INFO, "Before modal close",
+				MediaEntityBuilder.createScreenCaptureFromPath(captureScreenShot(driver)).build());
 		page.clickOnCloseEntryModalWindow();
-		Thread.sleep(5000);
-		test.log(Status.INFO, "After modal close",MediaEntityBuilder.createScreenCaptureFromPath(captureScreenShot(driver)).build());
+		test.log(Status.INFO, "After modal close",
+				MediaEntityBuilder.createScreenCaptureFromPath(captureScreenShot(driver)).build());
+
+	}
+
+	@Test(enabled = false)
+	public void floatingMenu() {
+		HerokuAppPageObject page = new HerokuAppPageObject(driver);
+		page.clickOnFloatingMenu();
+		driver.findElement(By.cssSelector("a[href='#home']")).click();
+		Assert.assertEquals("https://the-internet.herokuapp.com/floating_menu#home", driver.getCurrentUrl());
+		test.log(Status.PASS, "clicked on home");
+		driver.findElement(By.cssSelector("a[href='#news']")).click();
+		Assert.assertEquals("https://the-internet.herokuapp.com/floating_menu#news", driver.getCurrentUrl());
+		test.log(Status.PASS, "clicked on news");
+		driver.findElement(By.cssSelector("a[href='#contact']")).click();
+		Assert.assertEquals("https://the-internet.herokuapp.com/floating_menu#contact", driver.getCurrentUrl());
+		test.log(Status.PASS, "clicked on contact");
+		driver.findElement(By.cssSelector("a[href='#about']")).click();
+		Assert.assertEquals("https://the-internet.herokuapp.com/floating_menu#about", driver.getCurrentUrl());
+		test.log(Status.PASS, "clicked on about");
+	}
+	
+	@Test(enabled=false)
+	public void Geolocation()
+	{
+		HerokuAppPageObject page = new HerokuAppPageObject(driver);
+		page.clickOnGeoLocation();
+		page.clickOnWhereAmI();
+		test.log(Status.INFO, "Geolocation latitude - "+page.getLatitude());
+		test.log(Status.INFO, "Geolocation longitude - "+page.getLongitude());
+		
+	}
+	
+	@Test
+	public void HorizontalSlider() throws IOException, InterruptedException
+	{
+		HerokuAppPageObject page = new HerokuAppPageObject(driver);
+		page.clickOnHorizontalSlider();
+		test.log(Status.INFO, "Before",
+				MediaEntityBuilder.createScreenCaptureFromPath(captureScreenShot(driver)).build());
+		Thread.sleep(1000);
+		page.setHorizontalSliderValue(50);
+		test.log(Status.INFO, "After",
+				MediaEntityBuilder.createScreenCaptureFromPath(captureScreenShot(driver)).build());
+		test.log(Status.INFO, "value is "+page.slider.getAttribute("value"));
 		
 	}
 	
@@ -158,4 +203,13 @@ public class InternetHerokuAppTests extends BaseClass {
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+
 }

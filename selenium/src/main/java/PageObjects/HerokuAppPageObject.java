@@ -2,14 +2,15 @@ package PageObjects;
 
 import java.time.Duration;
 import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.JavascriptException;
 
 public class HerokuAppPageObject {
 
@@ -24,7 +25,6 @@ public class HerokuAppPageObject {
 	@FindBy(linkText = "A/B Testing")
 	private WebElement abTesting;
 
-	// @FindBy(xpath = "//h3[normalize-space()='A/B Test Control']")
 	@FindBy(xpath = "//h3[contains(text(), 'A/B')]")
 	private WebElement abTestingControl;
 
@@ -69,6 +69,37 @@ public class HerokuAppPageObject {
 	
 	@FindBy(xpath = "//p[normalize-space()='Close']")
 	public WebElement entryAdModalClose;
+	
+	@FindBy(css = "a[href='/floating_menu']")
+	public WebElement floatingMenu;
+	
+	@FindBy(xpath = "//a[normalize-space()='Geolocation']")
+	public WebElement geolocation;
+	
+	@FindBy(css = "button[onclick='getLocation()']")
+	public WebElement whereAmIBtn;
+	
+	@FindBy(id = "lat-value")
+	public WebElement latitude;
+	
+	@FindBy(id = "long-value")
+	public WebElement longitude;
+	
+	@FindBy(css = "a[href='/horizontal_slider']")
+	public WebElement horizontalSlider;
+	
+	@FindBy(xpath = "//input[@type='range']")
+	public WebElement slider;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -122,7 +153,7 @@ public class HerokuAppPageObject {
 
 	public int checkNoOfDeleteButtons() {
 		WebElement ele = driver.findElement(By.xpath("//div[@id='elements']"));
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3000));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
 		wait.until(ExpectedConditions.visibilityOfAllElements(ele));
 		return ele.findElements(By.tagName("button")).size();
 
@@ -177,5 +208,60 @@ public class HerokuAppPageObject {
 	{
 		entryAdModalClose.click();
 	}
+	
+	public void clickOnFloatingMenu()
+	{
+		floatingMenu.click();
+	}
+	
+	public void clickOnGeoLocation()
+	{
+		geolocation.click();
+	}
+	
+	public void clickOnWhereAmI()
+	{
+		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(3));
+		wait.until(ExpectedConditions.elementToBeClickable(whereAmIBtn)).click();
+		
+	}
 
+	public String getLatitude()
+	{
+		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(3));
+		wait.until(ExpectedConditions.elementToBeClickable(latitude));
+		return latitude.getText();
+	}
+	
+	public String getLongitude()
+	{
+		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(3));
+		wait.until(ExpectedConditions.elementToBeClickable(longitude));
+		return longitude.getText();
+	}
+	
+	public void clickOnHorizontalSlider()
+	{
+		horizontalSlider.click();
+	}
+	
+	public void setHorizontalSliderValue(int n)
+	{
+		Actions move = new Actions(driver);
+		move.dragAndDropBy(slider,n,0).build().perform();
+	}
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
