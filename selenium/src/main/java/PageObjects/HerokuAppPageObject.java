@@ -91,6 +91,15 @@ public class HerokuAppPageObject {
 	@FindBy(xpath = "//input[@type='range']")
 	public WebElement slider;
 	
+	@FindBy(css = "a[href='/nested_frames']")
+	public WebElement nestedFrames;
+	
+	@FindBy(xpath = "//a[normalize-space()='Multiple Windows']")
+	public WebElement multipleWindows;
+	
+	@FindBy(xpath = "//a[normalize-space()='Click Here']")
+	public WebElement windowClickHere;
+	
 	
 	
 	
@@ -251,7 +260,20 @@ public class HerokuAppPageObject {
 		move.dragAndDropBy(slider,n,0).build().perform();
 	}
 	
-
+	public void clickOnNestedFrames()
+	{
+		nestedFrames.click();
+	}
+	
+	public void clickOnMultipleWindows()
+	{
+		multipleWindows.click();
+	}
+	
+	public void clickOnWindowClickHere()
+	{
+		windowClickHere.click();
+	}
 	
 	
 	

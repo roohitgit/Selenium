@@ -87,7 +87,9 @@ public class ListenerClass extends BaseClass implements ITestListener, ISuiteLis
 	@Override
 	public void onFinish(ISuite suite) {
 		System.out.println("onSuiteFinish");
+		driver.quit();
 		extent.flush();
+		
 	}
 
 }

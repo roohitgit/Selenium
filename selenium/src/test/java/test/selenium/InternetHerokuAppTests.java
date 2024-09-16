@@ -4,16 +4,23 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.http.HttpResponse;
+import java.time.Duration;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.hc.client5.*;
 import org.apache.hc.client5.http.classic.HttpClient;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.WindowType;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -168,21 +175,19 @@ public class InternetHerokuAppTests extends BaseClass {
 		Assert.assertEquals("https://the-internet.herokuapp.com/floating_menu#about", driver.getCurrentUrl());
 		test.log(Status.PASS, "clicked on about");
 	}
-	
-	@Test(enabled=false)
-	public void Geolocation()
-	{
+
+	@Test(enabled = false)
+	public void Geolocation() {
 		HerokuAppPageObject page = new HerokuAppPageObject(driver);
 		page.clickOnGeoLocation();
 		page.clickOnWhereAmI();
-		test.log(Status.INFO, "Geolocation latitude - "+page.getLatitude());
-		test.log(Status.INFO, "Geolocation longitude - "+page.getLongitude());
-		
+		test.log(Status.INFO, "Geolocation latitude - " + page.getLatitude());
+		test.log(Status.INFO, "Geolocation longitude - " + page.getLongitude());
+
 	}
-	
-	@Test
-	public void HorizontalSlider() throws IOException, InterruptedException
-	{
+
+	@Test(enabled = false)
+	public void HorizontalSlider() throws IOException, InterruptedException {
 		HerokuAppPageObject page = new HerokuAppPageObject(driver);
 		page.clickOnHorizontalSlider();
 		test.log(Status.INFO, "Before",
@@ -191,25 +196,78 @@ public class InternetHerokuAppTests extends BaseClass {
 		page.setHorizontalSliderValue(50);
 		test.log(Status.INFO, "After",
 				MediaEntityBuilder.createScreenCaptureFromPath(captureScreenShot(driver)).build());
-		test.log(Status.INFO, "value is "+page.slider.getAttribute("value"));
-		
+		test.log(Status.INFO, "value is " + page.slider.getAttribute("value"));
+
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	@Test(enabled = false)
+	public void NestedFrames() {
+		HerokuAppPageObject page = new HerokuAppPageObject(driver);
+		page.clickOnNestedFrames();
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+
+		driver.switchTo().frame(driver.findElement(By.name("frame-top")));
+
+		driver.switchTo().frame(driver.findElement(By.name("frame-left")));
+		String leftFrame = wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body"))).getText();
+		test.log(Status.INFO, "Left frame text is - " + leftFrame);
+		driver.switchTo().parentFrame();
+
+		driver.switchTo().frame(driver.findElement(By.name("frame-middle")));
+		String middleFrame = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("content"))).getText();
+		test.log(Status.INFO, "Middle frame text is - " + middleFrame);
+		driver.switchTo().parentFrame();
+
+		driver.switchTo().frame(driver.findElement(By.name("frame-right")));
+		String rightFrame = wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body"))).getText();
+		test.log(Status.INFO, "Right frame text is - " + rightFrame);
+		driver.switchTo().parentFrame();
+		driver.switchTo().defaultContent();
+
+		driver.switchTo().frame(driver.findElement(By.name("frame-bottom")));
+		String bottomFrame = wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body"))).getText();
+		test.log(Status.INFO, "Bottom frame text is - " + bottomFrame);
+
+	}
+
+	@Test
+	public void MultipleWindows() throws IOException {
+		HerokuAppPageObject page = new HerokuAppPageObject(driver);
+		page.clickOnMultipleWindows();
+		page.clickOnWindowClickHere();
+		
+		Set<String> windows = driver.getWindowHandles();
+		Iterator<String> iterator = windows.iterator();
+		
+		String window1 = iterator.next();
+		String window2 = iterator.next();
+		
+		test.log(Status.INFO, "First window url is " + driver.getCurrentUrl());
+		test.log(Status.INFO, "First window title is " + driver.getTitle());
+		test.log(Status.INFO, "Switching window to 2");
+		driver.switchTo().window(window2);
+		
+		test.log(Status.INFO, "Second window url is " + driver.getCurrentUrl());
+		test.log(Status.INFO, "Second window title is " + driver.getTitle());
+		
+		driver.switchTo().window(window1);
+		test.log(Status.INFO, "Switching window to 1");
+		test.log(Status.INFO, "Again First window url is " + driver.getCurrentUrl());
+		test.log(Status.INFO, "Again First window title is " + driver.getTitle());
+		
+		driver.switchTo().newWindow(WindowType.TAB);
+		driver.get("https://www.google.com");
+		if(driver.findElement(By.xpath("//img[@alt='Google']")).isDisplayed())
+		{
+			test.log(Status.INFO, "new tab opened and google is loaded");
+		}
+		else
+		{
+			test.log(Status.INFO, "new tab error", MediaEntityBuilder.createScreenCaptureFromPath(captureScreenShot(driver)).build());
+			
+		}
+		
+
+	}
 
 }
