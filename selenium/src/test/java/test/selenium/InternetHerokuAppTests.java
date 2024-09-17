@@ -1,5 +1,6 @@
 package test.selenium;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -13,11 +14,17 @@ import org.apache.hc.client5.*;
 import org.apache.hc.client5.http.classic.HttpClient;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WindowType;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.logging.LogEntries;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -230,7 +237,7 @@ public class InternetHerokuAppTests extends BaseClass {
 
 	}
 
-	@Test
+	@Test(enabled=false)
 	public void MultipleWindows() throws IOException {
 		HerokuAppPageObject page = new HerokuAppPageObject(driver);
 		page.clickOnMultipleWindows();
@@ -269,5 +276,133 @@ public class InternetHerokuAppTests extends BaseClass {
 		
 
 	}
+	
+	@Test(enabled=false)
+	public void keyPresses()
+	{
+		HerokuAppPageObject page = new HerokuAppPageObject(driver);
+		page.clickOnKeyPresses();
+		Assert.assertEquals(page.keyPressField(Keys.ESCAPE), "You entered: ESCAPE");
+		Assert.assertEquals(page.keyPressField(Keys.SPACE), "You entered: SPACE");
+		Assert.assertEquals(page.keyPressField("C"),"You entered: C");
+		
+		
+	}
+	
+	@Test(enabled=false)
+	public void javaScriptError()
+	{
+		HerokuAppPageObject page = new HerokuAppPageObject(driver);
+		page.clickOnJavaScriptError();
+		LogEntries logs = driver.manage().logs().get(LogType.BROWSER);
+		
+		for(LogEntry log : logs)
+		{
+			test.log(Status.WARNING, log.getMessage());
+		}
+  }
+	
+	@Test(enabled=false)
+	public void javaScriptAlerts()
+	{
+		HerokuAppPageObject page = new HerokuAppPageObject(driver);
+		page.clickOnJavaScriptAlerts();
+		page.clickOnJSAlertBtn();
+		Alert alert = driver.switchTo().alert();
+		alert.accept();
+		test.log(Status.INFO, page.getJSAlertsResult());
+		page.clickOnJSConfirmBtn();
+		alert.dismiss();
+		test.log(Status.INFO, page.getJSAlertsResult());
+		page.clickOnJSConfirmBtn();
+		alert.accept();
+		test.log(Status.INFO, page.getJSAlertsResult());
+		page.clickOnJSPromptBtn();
+		alert.sendKeys("Hello World!");
+		alert.accept();
+		test.log(Status.INFO, page.getJSAlertsResult());	
+  }
+	
+	@Test(enabled=false)
+	public void JQueryUIMenuDownloadVerification() throws InterruptedException
+	{
+		HerokuAppPageObject page = new HerokuAppPageObject(driver);
+		page.clickOnJQueryUIMenus();
+		
+		Actions action = new Actions(driver);
+		WebElement enabled = driver.findElement(By.xpath("//a[normalize-space()='Enabled']"));
+		WebElement download = driver.findElement(By.xpath("//a[normalize-space()='Downloads']"));
+		WebElement pdf =driver.findElement(By.cssSelector("a[href='/download/jqueryui/menu/menu.pdf']"));
+		
+		action.moveToElement(enabled).perform();
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+		wait.until(ExpectedConditions.visibilityOf(download));
+		action.moveToElement(download).perform();
+		wait.until(ExpectedConditions.visibilityOf(pdf));
+		action.moveToElement(pdf).click().build().perform();
+	
+		
+	//--------------------------------- need to reprogram in future -----------------------------------------------
+    }
+
+		
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

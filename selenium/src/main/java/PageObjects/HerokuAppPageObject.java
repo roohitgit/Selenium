@@ -11,6 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.JavascriptException;
+import org.openqa.selenium.Keys;
 
 public class HerokuAppPageObject {
 
@@ -99,6 +100,36 @@ public class HerokuAppPageObject {
 	
 	@FindBy(xpath = "//a[normalize-space()='Click Here']")
 	public WebElement windowClickHere;
+	
+	@FindBy(xpath = "//a[normalize-space()='Key Presses']")
+	public WebElement keyPress;
+	
+	@FindBy(xpath = "//input[@id='target']")
+	public WebElement keyPressField;
+	
+	@FindBy(xpath = "//p[@id='result']")
+	public WebElement keyPressResult;
+	
+	@FindBy(xpath = "//a[normalize-space()='JavaScript onload event error']")
+	public WebElement javaScriptError;
+	
+	@FindBy(xpath = "//a[normalize-space()='JavaScript Alerts']")
+	public WebElement javaScriptAlerts;
+	
+	@FindBy(css = "button[onclick='jsAlert()']")
+	public WebElement JSAlertBtn;
+	
+	@FindBy(css = "button[onclick='jsConfirm()']")
+	public WebElement JSConfirmBtn;
+	
+	@FindBy(css = "button[onclick='jsPrompt()']")
+	public WebElement JSPromptBtn;
+	
+	@FindBy(xpath = "//p[@id='result']")
+	public WebElement JSAlertResult;
+	
+	@FindBy(css = "a[href='/jqueryui/menu']")
+	public WebElement JQueryUIMenus;
 	
 	
 	
@@ -275,7 +306,65 @@ public class HerokuAppPageObject {
 		windowClickHere.click();
 	}
 	
+	public void clickOnKeyPresses()
+	{
+		keyPress.click();
+	}
 	
+	public String keyPressField(Keys button)
+	{
+		keyPressField.sendKeys(button);
+		return keyPressResult.getText();
+		
+	}
+	
+	public String keyPressField(String button)
+	{
+		keyPressField.sendKeys(button);
+		return keyPressResult.getText();
+		
+	}
+	
+	public void clickOnJavaScriptError()
+	{
+		keyPress.click();
+	}
+	
+	public void clickOnJavaScriptAlerts()
+	{
+		javaScriptAlerts.click();
+	}
+	
+	public void clickOnJSAlertBtn()
+	{
+		JSAlertBtn.click();
+	}
+	
+	public void clickOnJSConfirmBtn()
+	{
+		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(3));
+		wait.until(ExpectedConditions.elementToBeClickable(JSConfirmBtn));
+		JSConfirmBtn.click();
+	}
+	
+	public void clickOnJSPromptBtn()
+	{
+		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(3));
+		wait.until(ExpectedConditions.elementToBeClickable(JSPromptBtn));
+		JSPromptBtn.click();
+	}
+	
+	public String getJSAlertsResult()
+	{
+		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(3));
+		wait.until(ExpectedConditions.visibilityOf(JSAlertResult));
+		return JSAlertResult.getText();
+	}
+	
+	public void clickOnJQueryUIMenus()
+	{
+		JQueryUIMenus.click();
+	}
 	
 	
 	
