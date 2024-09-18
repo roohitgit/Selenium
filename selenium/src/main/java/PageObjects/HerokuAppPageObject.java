@@ -57,80 +57,100 @@ public class HerokuAppPageObject {
 	public WebElement target;
 	
 	@FindBy(xpath = "//a[normalize-space()='Dropdown']")
-	public WebElement dropDown;
+	private WebElement dropDown;
 	
 	@FindBy(id = "dropdown")
 	public WebElement dropDownList;
 	
 	@FindBy(css = "a[href='/entry_ad']")
-	public WebElement entryAd;
+	private WebElement entryAd;
 	
 	@FindBy(css = "#restart-ad")
-	public WebElement restartAd;
+	private WebElement restartAd;
 	
 	@FindBy(xpath = "//p[normalize-space()='Close']")
-	public WebElement entryAdModalClose;
+	private WebElement entryAdModalClose;
 	
 	@FindBy(css = "a[href='/floating_menu']")
-	public WebElement floatingMenu;
+	private WebElement floatingMenu;
 	
 	@FindBy(xpath = "//a[normalize-space()='Geolocation']")
-	public WebElement geolocation;
+	private WebElement geolocation;
 	
 	@FindBy(css = "button[onclick='getLocation()']")
-	public WebElement whereAmIBtn;
+	private WebElement whereAmIBtn;
 	
 	@FindBy(id = "lat-value")
-	public WebElement latitude;
+	private WebElement latitude;
 	
 	@FindBy(id = "long-value")
-	public WebElement longitude;
+	private WebElement longitude;
 	
 	@FindBy(css = "a[href='/horizontal_slider']")
-	public WebElement horizontalSlider;
+	private WebElement horizontalSlider;
 	
 	@FindBy(xpath = "//input[@type='range']")
 	public WebElement slider;
 	
 	@FindBy(css = "a[href='/nested_frames']")
-	public WebElement nestedFrames;
+	private WebElement nestedFrames;
 	
 	@FindBy(xpath = "//a[normalize-space()='Multiple Windows']")
-	public WebElement multipleWindows;
+	private WebElement multipleWindows;
 	
 	@FindBy(xpath = "//a[normalize-space()='Click Here']")
-	public WebElement windowClickHere;
+	private WebElement windowClickHere;
 	
 	@FindBy(xpath = "//a[normalize-space()='Key Presses']")
-	public WebElement keyPress;
+	private WebElement keyPress;
 	
 	@FindBy(xpath = "//input[@id='target']")
-	public WebElement keyPressField;
+	private WebElement keyPressField;
 	
 	@FindBy(xpath = "//p[@id='result']")
-	public WebElement keyPressResult;
+	private WebElement keyPressResult;
 	
 	@FindBy(xpath = "//a[normalize-space()='JavaScript onload event error']")
-	public WebElement javaScriptError;
+	private WebElement javaScriptError;
 	
 	@FindBy(xpath = "//a[normalize-space()='JavaScript Alerts']")
-	public WebElement javaScriptAlerts;
+	private WebElement javaScriptAlerts;
 	
 	@FindBy(css = "button[onclick='jsAlert()']")
-	public WebElement JSAlertBtn;
+	private WebElement JSAlertBtn;
 	
 	@FindBy(css = "button[onclick='jsConfirm()']")
-	public WebElement JSConfirmBtn;
+	private WebElement JSConfirmBtn;
 	
 	@FindBy(css = "button[onclick='jsPrompt()']")
-	public WebElement JSPromptBtn;
+	private WebElement JSPromptBtn;
 	
 	@FindBy(xpath = "//p[@id='result']")
-	public WebElement JSAlertResult;
+	private WebElement JSAlertResult;
 	
 	@FindBy(css = "a[href='/jqueryui/menu']")
-	public WebElement JQueryUIMenus;
+	private WebElement JQueryUIMenus;
 	
+	@FindBy(css = "a[href='/inputs']")
+	private WebElement inputs;
+	
+	@FindBy(css = "input[type='number']")
+	public WebElement inputsNumbers;
+	
+	@FindBy(css = "a[href='/infinite_scroll']")
+	private WebElement infiniteScroll;
+	
+	@FindBy(css = "a[href='/hovers']")
+	private WebElement hovers;
+	
+	@FindBy(xpath = "(//img[@alt='User Avatar'])[1]")
+	public WebElement hoversimg1;
+	
+	@FindBy(xpath = "(//img[@alt='User Avatar'])[2]")
+	public WebElement hoversimg2;
+	
+	@FindBy(xpath = "(//img[@alt='User Avatar'])[3]")
+	public WebElement hoversimg3;
 	
 	
 	
@@ -366,9 +386,29 @@ public class HerokuAppPageObject {
 		JQueryUIMenus.click();
 	}
 	
+	public void clickOnInputs()
+	{
+		inputs.click();
+	}
+	
+	public String getinputNumber()
+	{
+		return inputsNumbers.getAttribute("value");
+	}
+	
+	public void clickOnInfiniteScroll()
+	{
+		infiniteScroll.click();
+	}
+	
+	public void clickOnhovers()
+	{
+		hovers.click();
+	}
 	
 	
 	
+
 	
 	
 	

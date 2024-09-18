@@ -9,7 +9,7 @@ import java.time.Duration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-
+import org.openqa.selenium.JavascriptExecutor;
 import org.apache.hc.client5.*;
 import org.apache.hc.client5.http.classic.HttpClient;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
@@ -237,74 +237,66 @@ public class InternetHerokuAppTests extends BaseClass {
 
 	}
 
-	@Test(enabled=false)
+	@Test(enabled = false)
 	public void MultipleWindows() throws IOException {
 		HerokuAppPageObject page = new HerokuAppPageObject(driver);
 		page.clickOnMultipleWindows();
 		page.clickOnWindowClickHere();
-		
+
 		Set<String> windows = driver.getWindowHandles();
 		Iterator<String> iterator = windows.iterator();
-		
+
 		String window1 = iterator.next();
 		String window2 = iterator.next();
-		
+
 		test.log(Status.INFO, "First window url is " + driver.getCurrentUrl());
 		test.log(Status.INFO, "First window title is " + driver.getTitle());
 		test.log(Status.INFO, "Switching window to 2");
 		driver.switchTo().window(window2);
-		
+
 		test.log(Status.INFO, "Second window url is " + driver.getCurrentUrl());
 		test.log(Status.INFO, "Second window title is " + driver.getTitle());
-		
+
 		driver.switchTo().window(window1);
 		test.log(Status.INFO, "Switching window to 1");
 		test.log(Status.INFO, "Again First window url is " + driver.getCurrentUrl());
 		test.log(Status.INFO, "Again First window title is " + driver.getTitle());
-		
+
 		driver.switchTo().newWindow(WindowType.TAB);
 		driver.get("https://www.google.com");
-		if(driver.findElement(By.xpath("//img[@alt='Google']")).isDisplayed())
-		{
+		if (driver.findElement(By.xpath("//img[@alt='Google']")).isDisplayed()) {
 			test.log(Status.INFO, "new tab opened and google is loaded");
+		} else {
+			test.log(Status.INFO, "new tab error",
+					MediaEntityBuilder.createScreenCaptureFromPath(captureScreenShot(driver)).build());
+
 		}
-		else
-		{
-			test.log(Status.INFO, "new tab error", MediaEntityBuilder.createScreenCaptureFromPath(captureScreenShot(driver)).build());
-			
-		}
-		
 
 	}
-	
-	@Test(enabled=false)
-	public void keyPresses()
-	{
+
+	@Test(enabled = false)
+	public void keyPresses() {
 		HerokuAppPageObject page = new HerokuAppPageObject(driver);
 		page.clickOnKeyPresses();
 		Assert.assertEquals(page.keyPressField(Keys.ESCAPE), "You entered: ESCAPE");
 		Assert.assertEquals(page.keyPressField(Keys.SPACE), "You entered: SPACE");
-		Assert.assertEquals(page.keyPressField("C"),"You entered: C");
-		
-		
+		Assert.assertEquals(page.keyPressField("C"), "You entered: C");
+
 	}
-	
-	@Test(enabled=false)
-	public void javaScriptError()
-	{
+
+	@Test(enabled = false)
+	public void javaScriptError() {
 		HerokuAppPageObject page = new HerokuAppPageObject(driver);
 		page.clickOnJavaScriptError();
 		LogEntries logs = driver.manage().logs().get(LogType.BROWSER);
-		
-		for(LogEntry log : logs)
-		{
+
+		for (LogEntry log : logs) {
 			test.log(Status.WARNING, log.getMessage());
 		}
-  }
-	
-	@Test(enabled=false)
-	public void javaScriptAlerts()
-	{
+	}
+
+	@Test(enabled = false)
+	public void javaScriptAlerts() {
 		HerokuAppPageObject page = new HerokuAppPageObject(driver);
 		page.clickOnJavaScriptAlerts();
 		page.clickOnJSAlertBtn();
@@ -320,44 +312,77 @@ public class InternetHerokuAppTests extends BaseClass {
 		page.clickOnJSPromptBtn();
 		alert.sendKeys("Hello World!");
 		alert.accept();
-		test.log(Status.INFO, page.getJSAlertsResult());	
-  }
-	
-	@Test(enabled=false)
-	public void JQueryUIMenuDownloadVerification() throws InterruptedException
-	{
+		test.log(Status.INFO, page.getJSAlertsResult());
+	}
+
+	@Test(enabled = false)
+	public void jQueryUIMenuDownloadVerification() throws InterruptedException {
 		HerokuAppPageObject page = new HerokuAppPageObject(driver);
 		page.clickOnJQueryUIMenus();
-		
+
 		Actions action = new Actions(driver);
 		WebElement enabled = driver.findElement(By.xpath("//a[normalize-space()='Enabled']"));
 		WebElement download = driver.findElement(By.xpath("//a[normalize-space()='Downloads']"));
-		WebElement pdf =driver.findElement(By.cssSelector("a[href='/download/jqueryui/menu/menu.pdf']"));
-		
+		WebElement pdf = driver.findElement(By.cssSelector("a[href='/download/jqueryui/menu/menu.pdf']"));
+
 		action.moveToElement(enabled).perform();
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		wait.until(ExpectedConditions.visibilityOf(download));
 		action.moveToElement(download).perform();
 		wait.until(ExpectedConditions.visibilityOf(pdf));
 		action.moveToElement(pdf).click().build().perform();
+
+		// --------------------------------- need to reprogram in future
+		// -----------------------------------------------
+	}
+
+	@Test(enabled = false)
+	public void inputs() {
+		HerokuAppPageObject page = new HerokuAppPageObject(driver);
+		page.clickOnInputs();
+		page.inputsNumbers.sendKeys("234");
+		Assert.assertEquals(page.getinputNumber(), "234");
+		test.log(Status.INFO, "Number matched with entered number");
+	}
+
+	@Test(enabled = false)
+	public void infiniteScroll() {
+		HerokuAppPageObject page = new HerokuAppPageObject(driver);
+		page.clickOnInfiniteScroll();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+
+		for (int i = 0; i < 5; i++) {
+			js.executeScript("window.scrollBy(0, 1000);");
+			try {
+				Thread.sleep(2000); // Wait for content to load
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
 	
+	@Test
+	public void hovers() {
+		HerokuAppPageObject page = new HerokuAppPageObject(driver);
+		page.clickOnhovers();
 		
-	//--------------------------------- need to reprogram in future -----------------------------------------------
-    }
-
+		Actions action = new Actions(driver);
+		action.moveToElement(page.hoversimg1).perform();
+		Assert.assertTrue(driver.findElement(By.xpath("//h5[normalize-space()='name: user1']")).isDisplayed());
+		driver.findElement(By.xpath("//h3[normalize-space()='Hovers']")).click();
 		
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-
-
+		action.moveToElement(page.hoversimg2).perform();
+		Assert.assertTrue(driver.findElement(By.xpath("//h5[normalize-space()='name: user2']")).isDisplayed());
+		driver.findElement(By.xpath("//h3[normalize-space()='Hovers']")).click();
+		
+		action.moveToElement(page.hoversimg3).perform();
+		Assert.assertTrue(driver.findElement(By.xpath("//h5[normalize-space()='name: user3']")).isDisplayed());
+		driver.findElement(By.xpath("//h3[normalize-space()='Hovers']")).click();
+		
+		
+	}
 	
 	
 	
@@ -368,41 +393,4 @@ public class InternetHerokuAppTests extends BaseClass {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }

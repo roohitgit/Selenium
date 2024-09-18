@@ -11,7 +11,7 @@
 		<classes>
 
 			<class name="utilities.BaseClass" />
-			<class name="rohit.selenium.InternetHerokuAppTests" />
+			<class name="test.selenium.InternetHerokuAppTests" />
 
 		</classes>
 
