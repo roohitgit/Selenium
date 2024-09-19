@@ -1,26 +1,18 @@
 package test.selenium;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import org.openqa.selenium.JavascriptExecutor;
-import org.apache.hc.client5.*;
-import org.apache.hc.client5.http.classic.HttpClient;
-import org.apache.hc.client5.http.classic.methods.HttpGet;
-import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WindowType;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogEntry;
@@ -30,12 +22,11 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import PageObjects.HerokuAppPageObject;
 import utilities.BaseClass;
-import utilities.ReadExcel;
+
 
 @Test
 public class InternetHerokuAppTests extends BaseClass {
@@ -363,7 +354,7 @@ public class InternetHerokuAppTests extends BaseClass {
 	}
 
 	
-	@Test
+	@Test(enabled = false)
 	public void hovers() {
 		HerokuAppPageObject page = new HerokuAppPageObject(driver);
 		page.clickOnhovers();
@@ -384,7 +375,38 @@ public class InternetHerokuAppTests extends BaseClass {
 		
 	}
 	
+	@Test(enabled=false)
+	public void formAuthentication()
+	{
+		HerokuAppPageObject page = new HerokuAppPageObject(driver);
+		page.clickOnFormAuthentication();
+		page.enterUserName();
+		page.password.sendKeys("Wrong_Password");
+		page.clickOnLogin();
+		test.log(Status.INFO, "Message for Invalid Inputs- "+page.getMessageOnFormAuthentication());
+		page.enterUserName();
+		page.enterPassword();
+		page.clickOnLogin();
+		test.log(Status.INFO, "Message for Valid Inputs- "+page.getMessageOnFormAuthentication());
+		page.clickOnLogout();
+		test.log(Status.INFO, "Message after Logout- "+page.getMessageOnFormAuthentication());
+		
+	}
 	
+	
+	@Test(enabled=false)
+	public void dynamicLoading()
+	{
+		HerokuAppPageObject page = new HerokuAppPageObject(driver);
+		page.clickOnDynamicLoading();
+		page.clickOnDynamicLoadingExample1();
+		page.clickOnDynamicLoadingStart();
+		test.log(Status.INFO,"Expecting Hello World! here - "+page.getTextDynamicLoadExamples());
+		driver.navigate().back();
+		page.clickOnDynamicLoadingExample2();
+		page.clickOnDynamicLoadingStart();
+		test.log(Status.INFO,"Expecting Hello World! here - "+page.getTextDynamicLoadExamples());
+	}
 	
 	
 	

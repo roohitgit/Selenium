@@ -10,7 +10,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.JavascriptException;
 import org.openqa.selenium.Keys;
 
 public class HerokuAppPageObject {
@@ -151,6 +150,41 @@ public class HerokuAppPageObject {
 	
 	@FindBy(xpath = "(//img[@alt='User Avatar'])[3]")
 	public WebElement hoversimg3;
+	
+	@FindBy(css = "a[href='/login']")
+	public WebElement formAuthentication;
+	
+	@FindBy(id = "username")
+	public WebElement username;
+	
+	@FindBy(id = "password")
+	public WebElement password;
+	
+	@FindBy(css = ".fa.fa-2x.fa-sign-in")
+	public WebElement loginBtn;
+	
+	@FindBy(css = ".icon-2x.icon-signout")
+	public WebElement logoutBtn;
+	
+	@FindBy(id = "flash")
+	public WebElement loginMessage;
+	
+	@FindBy(css = "a[href='/dynamic_loading']")
+	public WebElement dynamicLoading;
+	
+	@FindBy(partialLinkText = "Example 1")
+	public WebElement dynamicLoadExample1;
+	
+	@FindBy(partialLinkText = "Example 2")
+	public WebElement dynamicLoadExample2;
+	
+	@FindBy(xpath = "//button[normalize-space()='Start']")
+	public WebElement dynamicLoadStartBtn;
+	
+	@FindBy(xpath = "//div[@id='finish']/h4")
+	public WebElement dynamicLoadExampleText;
+	
+	
 	
 	
 	
@@ -406,8 +440,62 @@ public class HerokuAppPageObject {
 		hovers.click();
 	}
 	
+	public void clickOnFormAuthentication()
+	{
+		formAuthentication.click();
+	}
 	
+	public void enterUserName()
+	{
+		username.sendKeys("tomsmith");
+	}
 	
+	public void enterPassword()
+	{
+		password.sendKeys("SuperSecretPassword!");
+	}
+	
+	public void clickOnLogin()
+	{
+		loginBtn.click();
+	}
+	
+	public void clickOnLogout()
+	{
+		logoutBtn.click();
+	}
+	
+	public String getMessageOnFormAuthentication()
+	{
+		return loginMessage.getText();
+	}
+	
+	public void clickOnDynamicLoading()
+	{
+		dynamicLoading.click();
+	}
+	
+	public void clickOnDynamicLoadingExample1()
+	{
+		dynamicLoadExample1.click();
+	}
+	
+	public void clickOnDynamicLoadingExample2()
+	{
+		dynamicLoadExample2.click();
+	}
+	
+	public void clickOnDynamicLoadingStart()
+	{
+		dynamicLoadStartBtn.click();
+	}
+	
+	public String getTextDynamicLoadExamples()
+	{
+		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(5));
+		wait.until(ExpectedConditions.visibilityOf(dynamicLoadExampleText));
+		return dynamicLoadExampleText.getText();
+	}
 
 	
 	
