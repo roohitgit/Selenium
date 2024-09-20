@@ -408,7 +408,20 @@ public class InternetHerokuAppTests extends BaseClass {
 		test.log(Status.INFO,"Expecting Hello World! here - "+page.getTextDynamicLoadExamples());
 	}
 	
-	
+	@Test
+	public void uploadAndDownload()
+	{
+		HerokuAppPageObject page = new HerokuAppPageObject(driver);
+		page.clickOnFileDownload();
+		page.clickOnABCTextFileToDownload();
+		driver.navigate().back();
+		page.clickOnFileUpload();
+		page.chooseToUploadBtn.sendKeys(System.getProperty("user.dir")+"\\src\\main\\java\\utilities\\abc.txt");
+		page.clickOnUploadButton();
+		test.log(Status.INFO, "expected text is abc.txt - "+page.getTextFileUploaded());
+		
+		
+	}
 	
 	
 	

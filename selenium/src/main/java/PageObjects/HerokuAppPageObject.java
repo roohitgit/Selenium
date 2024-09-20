@@ -1,10 +1,15 @@
 package PageObjects;
 
+import java.io.File;
 import java.time.Duration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -152,43 +157,64 @@ public class HerokuAppPageObject {
 	public WebElement hoversimg3;
 	
 	@FindBy(css = "a[href='/login']")
-	public WebElement formAuthentication;
+	private WebElement formAuthentication;
 	
 	@FindBy(id = "username")
-	public WebElement username;
+	private WebElement username;
 	
 	@FindBy(id = "password")
 	public WebElement password;
 	
 	@FindBy(css = ".fa.fa-2x.fa-sign-in")
-	public WebElement loginBtn;
+	private WebElement loginBtn;
 	
 	@FindBy(css = ".icon-2x.icon-signout")
-	public WebElement logoutBtn;
+	private WebElement logoutBtn;
 	
 	@FindBy(id = "flash")
-	public WebElement loginMessage;
+	private WebElement loginMessage;
 	
 	@FindBy(css = "a[href='/dynamic_loading']")
-	public WebElement dynamicLoading;
+	private WebElement dynamicLoading;
 	
 	@FindBy(partialLinkText = "Example 1")
-	public WebElement dynamicLoadExample1;
+	private WebElement dynamicLoadExample1;
 	
 	@FindBy(partialLinkText = "Example 2")
-	public WebElement dynamicLoadExample2;
+	private WebElement dynamicLoadExample2;
 	
 	@FindBy(xpath = "//button[normalize-space()='Start']")
-	public WebElement dynamicLoadStartBtn;
+	private WebElement dynamicLoadStartBtn;
 	
 	@FindBy(xpath = "//div[@id='finish']/h4")
-	public WebElement dynamicLoadExampleText;
+	private WebElement dynamicLoadExampleText;
+	
+	@FindBy(css = "a[href='/download']")
+	private WebElement fileDownload;
+	
+	@FindBy(css = "a[href='/upload']")
+	private WebElement fileUpload;
+	
+	@FindBy(css = "a[href='download/abc.txt']")
+	private WebElement abcTextFile;
+	
+	@FindBy(css = "#file-upload")
+	public WebElement chooseToUploadBtn;
+	
+	@FindBy(css = "#file-submit")
+	private WebElement UploadBtn;
+	
+	@FindBy(id = "uploaded-files")
+	private WebElement getTextOfFileUploaded;
 	
 	
 	
 	
 	
-	
+			
+					
+							
+							
 	
 	
 	
@@ -497,10 +523,53 @@ public class HerokuAppPageObject {
 		return dynamicLoadExampleText.getText();
 	}
 
+	public void clickOnFileDownload()
+	{
+		fileDownload.click();
+	}
 	
+	public void clickOnABCTextFileToDownload()
+	{
+		abcTextFile.click();
+	}
 	
+	public void clickOnFileUpload()
+	{
+		fileUpload.click();
+	}
 	
+	public void clickOnChooseFileToUpload()
+	{
+		chooseToUploadBtn.click();
+	}
 	
+	public void clickOnUploadButton()
+	{
+		UploadBtn.click();
+	}
+	
+	public String getTextFileUploaded()
+	{
+		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(5));
+		wait.until(ExpectedConditions.visibilityOf(getTextOfFileUploaded));
+		return getTextOfFileUploaded.getText();
+	}
+	
+//	public Boolean confirmDownload()
+//	{
+//		 String downloadFilepath = "C:\\Users\\YourUsername\\Downloads";
+//	        Map<String, Object> prefs = new HashMap<String, Object>();
+//	        prefs.put("profile.default_content_settings.popups", 0);
+//	        prefs.put("download.default_directory", downloadFilepath);
+//	        ChromeOptions options = new ChromeOptions();      				//this options is need to add chromeDriver
+//	        options.setExperimentalOption("prefs", prefs);
+//	        File downloadedFile = new File(downloadFilepath + "/abc.txt");
+//	        boolean isFileDownloaded = downloadedFile.exists();
+//
+//		
+//		return isFileDownloaded;
+//		
+//	}
 	
 	
 }
