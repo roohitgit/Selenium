@@ -1,15 +1,10 @@
 package PageObjects;
 
-import java.io.File;
 import java.time.Duration;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -44,203 +39,169 @@ public class HerokuAppPageObject {
 
 	@FindBy(xpath = "//*[text()='Basic Auth']")
 	private WebElement basicAuth;
-	
+
 	@FindBy(css = "a[href='/broken_images']")
 	private WebElement brokenImages;
-	
+
 	@FindBy(xpath = "//a[normalize-space()='Checkboxes']")
 	private WebElement checkBoxes;
-	
+
 	@FindBy(css = "a[href='/drag_and_drop']")
 	private WebElement dragAndDrop;
-	
+
 	@FindBy(xpath = "//header[normalize-space()='A']")
 	public WebElement source;
-	
+
 	@FindBy(xpath = "//header[normalize-space()='B']")
 	public WebElement target;
-	
+
 	@FindBy(xpath = "//a[normalize-space()='Dropdown']")
 	private WebElement dropDown;
-	
+
 	@FindBy(id = "dropdown")
 	public WebElement dropDownList;
-	
+
 	@FindBy(css = "a[href='/entry_ad']")
 	private WebElement entryAd;
-	
+
 	@FindBy(css = "#restart-ad")
 	private WebElement restartAd;
-	
+
 	@FindBy(xpath = "//p[normalize-space()='Close']")
 	private WebElement entryAdModalClose;
-	
+
 	@FindBy(css = "a[href='/floating_menu']")
 	private WebElement floatingMenu;
-	
+
 	@FindBy(xpath = "//a[normalize-space()='Geolocation']")
 	private WebElement geolocation;
-	
+
 	@FindBy(css = "button[onclick='getLocation()']")
 	private WebElement whereAmIBtn;
-	
+
 	@FindBy(id = "lat-value")
 	private WebElement latitude;
-	
+
 	@FindBy(id = "long-value")
 	private WebElement longitude;
-	
+
 	@FindBy(css = "a[href='/horizontal_slider']")
 	private WebElement horizontalSlider;
-	
+
 	@FindBy(xpath = "//input[@type='range']")
 	public WebElement slider;
-	
+
 	@FindBy(css = "a[href='/nested_frames']")
 	private WebElement nestedFrames;
-	
+
 	@FindBy(xpath = "//a[normalize-space()='Multiple Windows']")
 	private WebElement multipleWindows;
-	
+
 	@FindBy(xpath = "//a[normalize-space()='Click Here']")
 	private WebElement windowClickHere;
-	
+
 	@FindBy(xpath = "//a[normalize-space()='Key Presses']")
 	private WebElement keyPress;
-	
+
 	@FindBy(xpath = "//input[@id='target']")
 	private WebElement keyPressField;
-	
+
 	@FindBy(xpath = "//p[@id='result']")
 	private WebElement keyPressResult;
-	
+
 	@FindBy(xpath = "//a[normalize-space()='JavaScript onload event error']")
 	private WebElement javaScriptError;
-	
+
 	@FindBy(xpath = "//a[normalize-space()='JavaScript Alerts']")
 	private WebElement javaScriptAlerts;
-	
+
 	@FindBy(css = "button[onclick='jsAlert()']")
 	private WebElement JSAlertBtn;
-	
+
 	@FindBy(css = "button[onclick='jsConfirm()']")
 	private WebElement JSConfirmBtn;
-	
+
 	@FindBy(css = "button[onclick='jsPrompt()']")
 	private WebElement JSPromptBtn;
-	
+
 	@FindBy(xpath = "//p[@id='result']")
 	private WebElement JSAlertResult;
-	
+
 	@FindBy(css = "a[href='/jqueryui/menu']")
 	private WebElement JQueryUIMenus;
-	
+
 	@FindBy(css = "a[href='/inputs']")
 	private WebElement inputs;
-	
+
 	@FindBy(css = "input[type='number']")
 	public WebElement inputsNumbers;
-	
+
 	@FindBy(css = "a[href='/infinite_scroll']")
 	private WebElement infiniteScroll;
-	
+
 	@FindBy(css = "a[href='/hovers']")
 	private WebElement hovers;
-	
+
 	@FindBy(xpath = "(//img[@alt='User Avatar'])[1]")
 	public WebElement hoversimg1;
-	
+
 	@FindBy(xpath = "(//img[@alt='User Avatar'])[2]")
 	public WebElement hoversimg2;
-	
+
 	@FindBy(xpath = "(//img[@alt='User Avatar'])[3]")
 	public WebElement hoversimg3;
-	
+
 	@FindBy(css = "a[href='/login']")
 	private WebElement formAuthentication;
-	
+
 	@FindBy(id = "username")
-	private WebElement username;
-	
+	public WebElement username;
+
 	@FindBy(id = "password")
 	public WebElement password;
-	
+
 	@FindBy(css = ".fa.fa-2x.fa-sign-in")
 	private WebElement loginBtn;
-	
+
 	@FindBy(css = ".icon-2x.icon-signout")
 	private WebElement logoutBtn;
-	
+
 	@FindBy(id = "flash")
 	private WebElement loginMessage;
-	
+
 	@FindBy(css = "a[href='/dynamic_loading']")
 	private WebElement dynamicLoading;
-	
+
 	@FindBy(partialLinkText = "Example 1")
 	private WebElement dynamicLoadExample1;
-	
+
 	@FindBy(partialLinkText = "Example 2")
 	private WebElement dynamicLoadExample2;
-	
+
 	@FindBy(xpath = "//button[normalize-space()='Start']")
 	private WebElement dynamicLoadStartBtn;
-	
+
 	@FindBy(xpath = "//div[@id='finish']/h4")
 	private WebElement dynamicLoadExampleText;
-	
+
 	@FindBy(css = "a[href='/download']")
 	private WebElement fileDownload;
-	
+
 	@FindBy(css = "a[href='/upload']")
 	private WebElement fileUpload;
-	
+
 	@FindBy(css = "a[href='download/abc.txt']")
 	private WebElement abcTextFile;
-	
+
 	@FindBy(css = "#file-upload")
 	public WebElement chooseToUploadBtn;
-	
+
 	@FindBy(css = "#file-submit")
 	private WebElement UploadBtn;
-	
+
 	@FindBy(id = "uploaded-files")
 	private WebElement getTextOfFileUploaded;
-	
-	
-	
-	
-	
-			
-					
-							
-							
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	public void clickOnABTesting() {
 		abTesting.click();
 	}
@@ -278,283 +239,232 @@ public class HerokuAppPageObject {
 		return ele.findElements(By.tagName("button")).size();
 
 	}
-	
-	public void clickOnBasicAuth()
-	{
+
+	public void clickOnBasicAuth() {
 		basicAuth.click();
 	}
-	
-	public void clickOnBrokenImages()
-	{
+
+	public void clickOnBrokenImages() {
 		brokenImages.click();
 	}
-	
-	public void clickOnCheckBoxes()
-	{
+
+	public void clickOnCheckBoxes() {
 		checkBoxes.click();
 	}
-	
-	public List<WebElement> checkCheckBoxes()
-	{
+
+	public List<WebElement> checkCheckBoxes() {
 		return driver.findElements((By.xpath("//input[@type='checkbox']")));
 	}
-	
-	public void clickOnDragAndDrop()
-	{
+
+	public void clickOnDragAndDrop() {
 		dragAndDrop.click();
 	}
-	
-	public void clickOnDropDown()
-	{
+
+	public void clickOnDropDown() {
 		dropDown.click();
 	}
-	
-	public void clickOnDropDownList()
-	{
+
+	public void clickOnDropDownList() {
 		dropDownList.click();
 	}
-	
-	public void clickOnEntryAd()
-	{
+
+	public void clickOnEntryAd() {
 		entryAd.click();
 	}
-	
-	public void clickOnRestartEntryAd()
-	{
+
+	public void clickOnRestartEntryAd() {
 		restartAd.click();
 	}
-	
-	public void clickOnCloseEntryModalWindow()
-	{
+
+	public void clickOnCloseEntryModalWindow() {
 		entryAdModalClose.click();
 	}
-	
-	public void clickOnFloatingMenu()
-	{
+
+	public void clickOnFloatingMenu() {
 		floatingMenu.click();
 	}
-	
-	public void clickOnGeoLocation()
-	{
+
+	public void clickOnGeoLocation() {
 		geolocation.click();
 	}
-	
-	public void clickOnWhereAmI()
-	{
-		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(3));
+
+	public void clickOnWhereAmI() {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
 		wait.until(ExpectedConditions.elementToBeClickable(whereAmIBtn)).click();
-		
+
 	}
 
-	public String getLatitude()
-	{
-		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(3));
+	public String getLatitude() {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
 		wait.until(ExpectedConditions.elementToBeClickable(latitude));
 		return latitude.getText();
 	}
-	
-	public String getLongitude()
-	{
-		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(3));
+
+	public String getLongitude() {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
 		wait.until(ExpectedConditions.elementToBeClickable(longitude));
 		return longitude.getText();
 	}
-	
-	public void clickOnHorizontalSlider()
-	{
+
+	public void clickOnHorizontalSlider() {
 		horizontalSlider.click();
 	}
-	
-	public void setHorizontalSliderValue(int n)
-	{
+
+	public void setHorizontalSliderValue(int n) {
 		Actions move = new Actions(driver);
-		move.dragAndDropBy(slider,n,0).build().perform();
+		move.dragAndDropBy(slider, n, 0).build().perform();
 	}
-	
-	public void clickOnNestedFrames()
-	{
+
+	public void clickOnNestedFrames() {
 		nestedFrames.click();
 	}
-	
-	public void clickOnMultipleWindows()
-	{
+
+	public void clickOnMultipleWindows() {
 		multipleWindows.click();
 	}
-	
-	public void clickOnWindowClickHere()
-	{
+
+	public void clickOnWindowClickHere() {
 		windowClickHere.click();
 	}
-	
-	public void clickOnKeyPresses()
-	{
+
+	public void clickOnKeyPresses() {
 		keyPress.click();
 	}
-	
-	public String keyPressField(Keys button)
-	{
+
+	public String keyPressField(Keys button) {
 		keyPressField.sendKeys(button);
 		return keyPressResult.getText();
-		
+
 	}
-	
-	public String keyPressField(String button)
-	{
+
+	public String keyPressField(String button) {
 		keyPressField.sendKeys(button);
 		return keyPressResult.getText();
-		
+
 	}
-	
-	public void clickOnJavaScriptError()
-	{
+
+	public void clickOnJavaScriptError() {
 		keyPress.click();
 	}
-	
-	public void clickOnJavaScriptAlerts()
-	{
+
+	public void clickOnJavaScriptAlerts() {
 		javaScriptAlerts.click();
 	}
-	
-	public void clickOnJSAlertBtn()
-	{
+
+	public void clickOnJSAlertBtn() {
 		JSAlertBtn.click();
 	}
-	
-	public void clickOnJSConfirmBtn()
-	{
-		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(3));
+
+	public void clickOnJSConfirmBtn() {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
 		wait.until(ExpectedConditions.elementToBeClickable(JSConfirmBtn));
 		JSConfirmBtn.click();
 	}
-	
-	public void clickOnJSPromptBtn()
-	{
-		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(3));
+
+	public void clickOnJSPromptBtn() {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
 		wait.until(ExpectedConditions.elementToBeClickable(JSPromptBtn));
 		JSPromptBtn.click();
 	}
-	
-	public String getJSAlertsResult()
-	{
-		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(3));
+
+	public String getJSAlertsResult() {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
 		wait.until(ExpectedConditions.visibilityOf(JSAlertResult));
 		return JSAlertResult.getText();
 	}
-	
-	public void clickOnJQueryUIMenus()
-	{
+
+	public void clickOnJQueryUIMenus() {
 		JQueryUIMenus.click();
 	}
-	
-	public void clickOnInputs()
-	{
+
+	public void clickOnInputs() {
 		inputs.click();
 	}
-	
-	public String getinputNumber()
-	{
+
+	public String getinputNumber() {
 		return inputsNumbers.getAttribute("value");
 	}
-	
-	public void clickOnInfiniteScroll()
-	{
+
+	public void clickOnInfiniteScroll() {
 		infiniteScroll.click();
 	}
-	
-	public void clickOnhovers()
-	{
+
+	public void clickOnhovers() {
 		hovers.click();
 	}
-	
-	public void clickOnFormAuthentication()
-	{
+
+	public void clickOnFormAuthentication() {
 		formAuthentication.click();
 	}
-	
-	public void enterUserName()
-	{
+
+	public void enterUserName() {
 		username.sendKeys("tomsmith");
 	}
-	
-	public void enterPassword()
-	{
+
+	public void enterPassword() {
 		password.sendKeys("SuperSecretPassword!");
 	}
-	
-	public void clickOnLogin()
-	{
+
+	public void clickOnLogin() {
 		loginBtn.click();
 	}
-	
-	public void clickOnLogout()
-	{
+
+	public void clickOnLogout() {
 		logoutBtn.click();
 	}
-	
-	public String getMessageOnFormAuthentication()
-	{
+
+	public String getMessageOnFormAuthentication() {
 		return loginMessage.getText();
 	}
-	
-	public void clickOnDynamicLoading()
-	{
+
+	public void clickOnDynamicLoading() {
 		dynamicLoading.click();
 	}
-	
-	public void clickOnDynamicLoadingExample1()
-	{
+
+	public void clickOnDynamicLoadingExample1() {
 		dynamicLoadExample1.click();
 	}
-	
-	public void clickOnDynamicLoadingExample2()
-	{
+
+	public void clickOnDynamicLoadingExample2() {
 		dynamicLoadExample2.click();
 	}
-	
-	public void clickOnDynamicLoadingStart()
-	{
+
+	public void clickOnDynamicLoadingStart() {
 		dynamicLoadStartBtn.click();
 	}
-	
-	public String getTextDynamicLoadExamples()
-	{
-		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(5));
+
+	public String getTextDynamicLoadExamples() {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		wait.until(ExpectedConditions.visibilityOf(dynamicLoadExampleText));
 		return dynamicLoadExampleText.getText();
 	}
 
-	public void clickOnFileDownload()
-	{
+	public void clickOnFileDownload() {
 		fileDownload.click();
 	}
-	
-	public void clickOnABCTextFileToDownload()
-	{
+
+	public void clickOnABCTextFileToDownload() {
 		abcTextFile.click();
 	}
-	
-	public void clickOnFileUpload()
-	{
+
+	public void clickOnFileUpload() {
 		fileUpload.click();
 	}
-	
-	public void clickOnChooseFileToUpload()
-	{
+
+	public void clickOnChooseFileToUpload() {
 		chooseToUploadBtn.click();
 	}
-	
-	public void clickOnUploadButton()
-	{
+
+	public void clickOnUploadButton() {
 		UploadBtn.click();
 	}
-	
-	public String getTextFileUploaded()
-	{
-		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(5));
+
+	public String getTextFileUploaded() {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		wait.until(ExpectedConditions.visibilityOf(getTextOfFileUploaded));
 		return getTextOfFileUploaded.getText();
 	}
-	
+
 //	public Boolean confirmDownload()
 //	{
 //		 String downloadFilepath = "C:\\Users\\YourUsername\\Downloads";
@@ -570,6 +480,5 @@ public class HerokuAppPageObject {
 //		return isFileDownloaded;
 //		
 //	}
-	
-	
+
 }
