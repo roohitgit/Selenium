@@ -1,5 +1,10 @@
 package test.selenium;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -12,8 +17,8 @@ import utilities.ReadExcel;
 @Test
 public class DataProviderAndExcelSheet extends BaseClass {
 
-	 @Test(dataProvider = "dataProvider")
-	    public void runTest(String userName, String passWord) {
+	 @Test(dataProvider = "dataProvider",enabled=false)
+	    public void dataProviderAndExcelSheet(String userName, String passWord) {
 	        HerokuAppPageObject p = new HerokuAppPageObject(driver);
 	        p.clickOnFormAuthentication();
 	        p.username.sendKeys(userName);
@@ -35,5 +40,26 @@ public class DataProviderAndExcelSheet extends BaseClass {
 	        }
 	        return data;
 	    }
+	    
+	    
+	    
+	    @Test
+	    public void readDataFromPropertyFile() throws IOException
+	    {
+	    	String propFilePath = System.getProperty("user.dir")+"\\src\\main\\java\\utilities\\PropertyFile.txt";
+	    	Properties properties = new Properties();
+	    	FileInputStream file = new FileInputStream(propFilePath);
+	    	properties.load(file);
+	    	test.log(Status.INFO, "url from prop is- "+properties.getProperty("url"));
+	    	test.log(Status.INFO, "browser from prop is- "+properties.getProperty("browser"));
+	    	test.log(Status.INFO, "input from prop is- "+properties.getProperty("input"));
+
+	    }
+	    
+	    
+	    
+	    
+	    
+	    
 
 }
